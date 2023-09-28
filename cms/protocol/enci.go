@@ -3,12 +3,12 @@ package protocol
 import (
 	"encoding/asn1"
 
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-// EncapsulatedContentInfo ::= SEQUENCE {
-//   eContentType ContentType,
-//   eContent [0] EXPLICIT OCTET STRING OPTIONAL }
+//	EncapsulatedContentInfo ::= SEQUENCE {
+//	  eContentType ContentType,
+//	  eContent [0] EXPLICIT OCTET STRING OPTIONAL }
 type EncapsulatedContentInfo struct {
 	EContentType asn1.ObjectIdentifier ``                               // ContentType ::= OBJECT IDENTIFIER
 	EContent     []byte                `asn1:"optional,explicit,tag:0"` //

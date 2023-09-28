@@ -17,8 +17,8 @@ import (
 	"net/http"
 	"time"
 
-	asn "github.com/InfiniteLoopSpace/go_S-MIME/asn1"
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	asn "github.com/InSitu-Software/go_S-MIME/asn1"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
 // SignedDataContent returns SignedData if ContentType is SignedData.
@@ -37,13 +37,13 @@ func (ci ContentInfo) SignedDataContent() (*SignedData, error) {
 	return sd, nil
 }
 
-// SignedData ::= SEQUENCE {
-//   version CMSVersion,
-//   digestAlgorithms DigestAlgorithmIdentifiers,
-//   encapContentInfo EncapsulatedContentInfo,
-//   certificates [0] IMPLICIT CertificateSet OPTIONAL,
-//   crls [1] IMPLICIT RevocationInfoChoices OPTIONAL,
-//   signerInfos SignerInfos }
+//	SignedData ::= SEQUENCE {
+//	  version CMSVersion,
+//	  digestAlgorithms DigestAlgorithmIdentifiers,
+//	  encapContentInfo EncapsulatedContentInfo,
+//	  certificates [0] IMPLICIT CertificateSet OPTIONAL,
+//	  crls [1] IMPLICIT RevocationInfoChoices OPTIONAL,
+//	  signerInfos SignerInfos }
 type SignedData struct {
 	Version          int                        ``                          // CMSVersion ::= INTEGER { v0(0), v1(1), v2(2), v3(3), v4(4), v5(5) }
 	DigestAlgorithms []pkix.AlgorithmIdentifier `asn1:"set"`                //DigestAlgorithmIdentifiers ::= SET OF DigestAlgorithmIdentifier //DigestAlgorithmIdentifier ::= AlgorithmIdentifier
@@ -53,37 +53,37 @@ type SignedData struct {
 	SignerInfos      []SignerInfo               `asn1:"set"`                // SignerInfos ::= SET OF SignerInfo
 }
 
-// CertificateChoices ::= CHOICE {
-//   certificate Certificate,
-//   extendedCertificate [0] IMPLICIT ExtendedCertificate, -- Obsolete
-//   v1AttrCert [1] IMPLICIT AttributeCertificateV1,       -- Obsolete
-//   v2AttrCert [2] IMPLICIT AttributeCertificateV2,
-//   other [3] IMPLICIT OtherCertificateFormat }
+//	CertificateChoices ::= CHOICE {
+//	  certificate Certificate,
+//	  extendedCertificate [0] IMPLICIT ExtendedCertificate, -- Obsolete
+//	  v1AttrCert [1] IMPLICIT AttributeCertificateV1,       -- Obsolete
+//	  v2AttrCert [2] IMPLICIT AttributeCertificateV2,
+//	  other [3] IMPLICIT OtherCertificateFormat }
 type CertificateChoices struct {
 	Cert       x509.Certificate       `asn1:"optional"`
 	V2AttrCert asn1.RawValue          `asn1:"optional,tag:2"`
 	Other      OtherCertificateFormat `asn1:"optional,tag:3"`
 }
 
-// OtherCertificateFormat ::= SEQUENCE {
-//   otherCertFormat OBJECT IDENTIFIER,
-//   otherCert ANY DEFINED BY otherCertFormat }
+//	OtherCertificateFormat ::= SEQUENCE {
+//	  otherCertFormat OBJECT IDENTIFIER,
+//	  otherCert ANY DEFINED BY otherCertFormat }
 type OtherCertificateFormat struct {
 	OtherCertFormat asn1.ObjectIdentifier
 	OtherCert       asn1.RawValue
 }
 
-// RevocationInfoChoice ::= CHOICE {
-//   crl CertificateList,
-//   other [1] IMPLICIT OtherRevocationInfoFormat }
+//	RevocationInfoChoice ::= CHOICE {
+//	  crl CertificateList,
+//	  other [1] IMPLICIT OtherRevocationInfoFormat }
 type RevocationInfoChoice struct {
 	Crl   pkix.CertificateList      `asn1:"optional"`
 	Other OtherRevocationInfoFormat `asn1:"optional,tag:1"`
 }
 
-// OtherRevocationInfoFormat ::= SEQUENCE {
-//   otherRevInfoFormat OBJECT IDENTIFIER,
-//   otherRevInfo ANY DEFINED BY otherRevInfoFormat }
+//	OtherRevocationInfoFormat ::= SEQUENCE {
+//	  otherRevInfoFormat OBJECT IDENTIFIER,
+//	  otherRevInfo ANY DEFINED BY otherRevInfoFormat }
 type OtherRevocationInfoFormat struct {
 	OtherRevInfoFormat asn1.ObjectIdentifier
 	OtherRevInfo       asn1.RawValue

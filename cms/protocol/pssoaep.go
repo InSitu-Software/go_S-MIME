@@ -8,7 +8,7 @@ import (
 	"encoding/asn1"
 	"errors"
 
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
 type pssParameters struct {
@@ -103,11 +103,11 @@ func newPSS(hash crypto.Hash, pub *rsa.PublicKey) (signatureAlgorithm pkix.Algor
 	return
 }
 
-// RSAESOAEPparams  ::=  SEQUENCE  {
-//	hashFunc    [0] AlgorithmIdentifier DEFAULT sha1Identifier,
-//	maskGenFunc [1] AlgorithmIdentifier DEFAULT mgf1SHA1Identifier,
-//	pSourceFunc [2] AlgorithmIdentifier DEFAULT
-//						pSpecifiedEmptyIdentifier  }
+//	RSAESOAEPparams  ::=  SEQUENCE  {
+//		hashFunc    [0] AlgorithmIdentifier DEFAULT sha1Identifier,
+//		maskGenFunc [1] AlgorithmIdentifier DEFAULT mgf1SHA1Identifier,
+//		pSourceFunc [2] AlgorithmIdentifier DEFAULT
+//							pSpecifiedEmptyIdentifier  }
 type RSAESOAEPparams struct {
 	HashFunc    pkix.AlgorithmIdentifier `asn1:"optional,explicit,tag:0"`
 	MaskGenFunc pkix.AlgorithmIdentifier `asn1:"optional,explicit,tag:1"`

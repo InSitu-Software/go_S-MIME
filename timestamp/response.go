@@ -1,13 +1,13 @@
 package timestamp
 
 import (
-	asn "github.com/InfiniteLoopSpace/go_S-MIME/asn1"
-	cms "github.com/InfiniteLoopSpace/go_S-MIME/cms/protocol"
+	asn "github.com/InSitu-Software/go_S-MIME/asn1"
+	cms "github.com/InSitu-Software/go_S-MIME/cms/protocol"
 )
 
-//TimeStampResp ::= SEQUENCE  {
-//	status                  PKIStatusInfo,
-//	timeStampToken          TimeStampToken     OPTIONAL  }
+//	TimeStampResp ::= SEQUENCE  {
+//		status                  PKIStatusInfo,
+//		timeStampToken          TimeStampToken     OPTIONAL  }
 type TimeStampResp struct {
 	Status         PKIStatusInfo
 	TimeStampToken cms.ContentInfo `asn1:"optional"`

@@ -5,19 +5,22 @@ import (
 	"encoding/asn1"
 	"log"
 
-	asn "github.com/InfiniteLoopSpace/go_S-MIME/asn1"
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	asn "github.com/InSitu-Software/go_S-MIME/asn1"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-//AuthEnvelopedData ::= SEQUENCE {
-//	version CMSVersion,
-//	originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,
-//	recipientInfos RecipientInfos,
-//	authEncryptedContentInfo EncryptedContentInfo,
-///	authAttrs [1] IMPLICIT AuthAttributes OPTIONAL,
+//	AuthEnvelopedData ::= SEQUENCE {
+//		version CMSVersion,
+//		originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,
+//		recipientInfos RecipientInfos,
+//		authEncryptedContentInfo EncryptedContentInfo,
+//
+// /	authAttrs [1] IMPLICIT AuthAttributes OPTIONAL,
+//
 //	mac MessageAuthenticationCode,
 //	unauthAttrs [2] IMPLICIT UnauthAttributes OPTIONAL }
-//https://tools.ietf.org/html/rfc5083##section-2.1
+//
+// https://tools.ietf.org/html/rfc5083##section-2.1
 type AuthEnvelopedData struct {
 	Version        int
 	OriginatorInfo asn1.RawValue   `asn1:"optional,tag:0"`

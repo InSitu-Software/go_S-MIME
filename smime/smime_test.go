@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/InfiniteLoopSpace/go_S-MIME/cms"
-	"github.com/InfiniteLoopSpace/go_S-MIME/openssl"
-	"github.com/InfiniteLoopSpace/go_S-MIME/pki"
+	"github.com/InSitu-Software/go_S-MIME/cms"
+	"github.com/InSitu-Software/go_S-MIME/openssl"
+	"github.com/InSitu-Software/go_S-MIME/pki"
 )
 
 var (
@@ -233,7 +233,7 @@ vCunrnVNqcBU+B1O8BiR4yPWnLMcRSyFRVJQA7HCp8JlDV6abXd8vPFfXuC9WN7rOvTKF8
 Y0ZB9qANMAsGA1UdDzEEAwIAEA==
 -----END PRIVATE KEY-----`
 
-//https://github.com/fullsailor/pkcs7/issues/9
+// https://github.com/fullsailor/pkcs7/issues/9
 func TestSampleiTunesReceipt(t *testing.T) {
 
 	b, err := base64.StdEncoding.DecodeString(strings.TrimSpace(iTunesReceipt))
@@ -359,7 +359,7 @@ VZXl0gKgxSOmDrcp1eQxdlymzrPv9U60wUJ0bkPfrU9qZj3mJrmrkQk61JTe3j6/
 QfjfFBG9JG2mUmYQP1KQ3SypGHzDW8vngvsGu//tNU0NFfOqQu4bYU4VpQl0nPtD
 4B85NkrgvQsWAQ==`
 
-//https://github.com/fullsailor/pkcs7/issues/11
+// https://github.com/fullsailor/pkcs7/issues/11
 func TestSCEP(t *testing.T) {
 
 	b, err := base64.StdEncoding.DecodeString(SCEP)

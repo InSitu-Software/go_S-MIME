@@ -5,16 +5,16 @@ import (
 	"encoding/asn1"
 	"log"
 
-	asn "github.com/InfiniteLoopSpace/go_S-MIME/asn1"
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	asn "github.com/InSitu-Software/go_S-MIME/asn1"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-//EnvelopedData ::= SEQUENCE {
-//	version CMSVersion,
-//	originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,
-//	recipientInfos RecipientInfos,
-//	encryptedContentInfo EncryptedContentInfo,
-//	unprotectedAttrs [1] IMPLICIT UnprotectedAttributes OPTIONAL }
+//	EnvelopedData ::= SEQUENCE {
+//		version CMSVersion,
+//		originatorInfo [0] IMPLICIT OriginatorInfo OPTIONAL,
+//		recipientInfos RecipientInfos,
+//		encryptedContentInfo EncryptedContentInfo,
+//		unprotectedAttrs [1] IMPLICIT UnprotectedAttributes OPTIONAL }
 type EnvelopedData struct {
 	Version          int
 	OriginatorInfo   asn1.RawValue        `asn1:"optional,tag:0"`

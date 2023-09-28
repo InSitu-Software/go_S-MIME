@@ -9,18 +9,18 @@ import (
 	"fmt"
 	"time"
 
-	asn "github.com/InfiniteLoopSpace/go_S-MIME/asn1"
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	asn "github.com/InSitu-Software/go_S-MIME/asn1"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-// SignerInfo ::= SEQUENCE {
-//   version CMSVersion,
-//   sid SignerIdentifier,
-//   digestAlgorithm DigestAlgorithmIdentifier,
-//   signedAttrs [0] IMPLICIT SignedAttributes OPTIONAL,
-//   signatureAlgorithm SignatureAlgorithmIdentifier,
-//   signature SignatureValue,
-//   unsignedAttrs [1] IMPLICIT UnsignedAttributes OPTIONAL }
+//	SignerInfo ::= SEQUENCE {
+//	  version CMSVersion,
+//	  sid SignerIdentifier,
+//	  digestAlgorithm DigestAlgorithmIdentifier,
+//	  signedAttrs [0] IMPLICIT SignedAttributes OPTIONAL,
+//	  signatureAlgorithm SignatureAlgorithmIdentifier,
+//	  signature SignatureValue,
+//	  unsignedAttrs [1] IMPLICIT UnsignedAttributes OPTIONAL }
 type SignerInfo struct {
 	Version            int                      ``                          // CMSVersion ::= INTEGER    { v0(0), v1(1), v2(2), v3(3), v4(4), v5(5) }
 	SID                SignerIdentifier         `asn1:"choice"`             //
@@ -31,9 +31,9 @@ type SignerInfo struct {
 	UnsignedAttrs      []Attribute              `asn1:"set,optional,tag:1"` // UnsignedAttributes ::= SET SIZE (1..MAX) OF Attribute
 }
 
-//SignerIdentifier ::= CHOICE {
-//	issuerAndSerialNumber IssuerAndSerialNumber,
-//	subjectKeyIdentifier [0] SubjectKeyIdentifier }
+//	SignerIdentifier ::= CHOICE {
+//		issuerAndSerialNumber IssuerAndSerialNumber,
+//		subjectKeyIdentifier [0] SubjectKeyIdentifier }
 type SignerIdentifier struct {
 	IAS IssuerAndSerialNumber `asn1:"optional"`
 	SKI []byte                `asn1:"optional,tag:0"`

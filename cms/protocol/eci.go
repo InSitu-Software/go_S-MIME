@@ -4,13 +4,13 @@ import (
 	"crypto/x509/pkix"
 	"encoding/asn1"
 
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-//EncryptedContentInfo ::= SEQUENCE {
-//	contentType ContentType,
-//	contentEncryptionAlgorithm ContentEncryptionAlgorithmIdentifier,
-//	encryptedContent [0] IMPLICIT EncryptedContent OPTIONAL }
+//	EncryptedContentInfo ::= SEQUENCE {
+//		contentType ContentType,
+//		contentEncryptionAlgorithm ContentEncryptionAlgorithmIdentifier,
+//		encryptedContent [0] IMPLICIT EncryptedContent OPTIONAL }
 type EncryptedContentInfo struct {
 	EContentType               asn1.ObjectIdentifier
 	ContentEncryptionAlgorithm pkix.AlgorithmIdentifier

@@ -12,19 +12,19 @@ import (
 	"encoding/asn1"
 	"math/big"
 
-	cms "github.com/InfiniteLoopSpace/go_S-MIME/cms/protocol"
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	cms "github.com/InSitu-Software/go_S-MIME/cms/protocol"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-// TimeStampReq ::= SEQUENCE  {
-//	version                  INTEGER  { v1(1) },
-//	messageImprint           MessageImprint,
-//	  --a hash algorithm OID and the hash value of the data to be
-//	  --time-stamped
-//	reqPolicy                TSAPolicyId                OPTIONAL,
-//	nonce                    INTEGER                    OPTIONAL,
-//	certReq                  BOOLEAN                    DEFAULT FALSE,
-//	extensions               [0] IMPLICIT Extensions    OPTIONAL  }
+//	TimeStampReq ::= SEQUENCE  {
+//		version                  INTEGER  { v1(1) },
+//		messageImprint           MessageImprint,
+//		  --a hash algorithm OID and the hash value of the data to be
+//		  --time-stamped
+//		reqPolicy                TSAPolicyId                OPTIONAL,
+//		nonce                    INTEGER                    OPTIONAL,
+//		certReq                  BOOLEAN                    DEFAULT FALSE,
+//		extensions               [0] IMPLICIT Extensions    OPTIONAL  }
 type TimeStampReq struct {
 	Version        int
 	MessageImprint MessageImprint
@@ -93,9 +93,9 @@ func (req TimeStampReq) Do(url string) (TimeStampResp, error) {
 	return ParseResponse(buf.Bytes())
 }
 
-//MessageImprint ::= SEQUENCE  {
-//	hashAlgorithm                AlgorithmIdentifier,
-//	hashedMessage                OCTET STRING  }
+//	MessageImprint ::= SEQUENCE  {
+//		hashAlgorithm                AlgorithmIdentifier,
+//		hashedMessage                OCTET STRING  }
 type MessageImprint struct {
 	HashAlgorithm pkix.AlgorithmIdentifier
 	HashedMessage []byte

@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"strings"
 
-	cms "github.com/InfiniteLoopSpace/go_S-MIME/cms/protocol"
+	cms "github.com/InSitu-Software/go_S-MIME/cms/protocol"
 )
 
-// PKIStatusInfo ::= SEQUENCE {
-//    status        PKIStatus,
-//    statusString  PKIFreeText     OPTIONAL,
-//    failInfo      PKIFailureInfo  OPTIONAL  }
+//	PKIStatusInfo ::= SEQUENCE {
+//	   status        PKIStatus,
+//	   statusString  PKIFreeText     OPTIONAL,
+//	   failInfo      PKIFailureInfo  OPTIONAL  }
 type PKIStatusInfo struct {
 	Status       int
 	StatusString PKIFreeText    `asn1:"optional"`

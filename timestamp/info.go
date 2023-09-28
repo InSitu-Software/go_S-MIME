@@ -6,28 +6,28 @@ import (
 	"math/big"
 	"time"
 
-	asn "github.com/InfiniteLoopSpace/go_S-MIME/asn1"
-	cms "github.com/InfiniteLoopSpace/go_S-MIME/cms/protocol"
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	asn "github.com/InSitu-Software/go_S-MIME/asn1"
+	cms "github.com/InSitu-Software/go_S-MIME/cms/protocol"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-// TSTInfo ::= SEQUENCE  {
-//    version                      INTEGER  { v1(1) },
-//    policy                       TSAPolicyId,
-//    messageImprint               MessageImprint,
-//      -- MUST have the same value as the similar field in
-//      -- TimeStampReq
-//    serialNumber                 INTEGER,
-//     -- Time-Stamping users MUST be ready to accommodate integers
-//     -- up to 160 bits.
-//    genTime                      GeneralizedTime,
-//    accuracy                     Accuracy                 OPTIONAL,
-//    ordering                     BOOLEAN             DEFAULT FALSE,
-//    nonce                        INTEGER                  OPTIONAL,
-//      -- MUST be present if the similar field was present
-//      -- in TimeStampReq.  In that case it MUST have the same value.
-//    tsa                          [0] GeneralName          OPTIONAL,
-//    extensions                   [1] IMPLICIT Extensions  OPTIONAL   }
+//	TSTInfo ::= SEQUENCE  {
+//	   version                      INTEGER  { v1(1) },
+//	   policy                       TSAPolicyId,
+//	   messageImprint               MessageImprint,
+//	     -- MUST have the same value as the similar field in
+//	     -- TimeStampReq
+//	   serialNumber                 INTEGER,
+//	    -- Time-Stamping users MUST be ready to accommodate integers
+//	    -- up to 160 bits.
+//	   genTime                      GeneralizedTime,
+//	   accuracy                     Accuracy                 OPTIONAL,
+//	   ordering                     BOOLEAN             DEFAULT FALSE,
+//	   nonce                        INTEGER                  OPTIONAL,
+//	     -- MUST be present if the similar field was present
+//	     -- in TimeStampReq.  In that case it MUST have the same value.
+//	   tsa                          [0] GeneralName          OPTIONAL,
+//	   extensions                   [1] IMPLICIT Extensions  OPTIONAL   }
 type TSTInfo struct {
 	Version        int
 	Policy         asn1.ObjectIdentifier

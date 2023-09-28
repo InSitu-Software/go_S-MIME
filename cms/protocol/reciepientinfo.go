@@ -13,15 +13,15 @@ import (
 	"log"
 	"time"
 
-	oid "github.com/InfiniteLoopSpace/go_S-MIME/oid"
+	oid "github.com/InSitu-Software/go_S-MIME/oid"
 )
 
-//RecipientInfo ::= CHOICE {
-//	ktri KeyTransRecipientInfo,
-//	kari [1] KeyAgreeRecipientInfo,
-//	kekri [2] KEKRecipientInfo,
-//	pwri [3] PasswordRecipientInfo,
-//	ori [4] OtherRecipientInfo }
+//	RecipientInfo ::= CHOICE {
+//		ktri KeyTransRecipientInfo,
+//		kari [1] KeyAgreeRecipientInfo,
+//		kekri [2] KEKRecipientInfo,
+//		pwri [3] PasswordRecipientInfo,
+//		ori [4] OtherRecipientInfo }
 type RecipientInfo struct {
 	KTRI  KeyTransRecipientInfo `asn1:"optional"`
 	KARI  KeyAgreeRecipientInfo `asn1:"optional,tag:1"` //KeyAgreeRecipientInfo
@@ -42,11 +42,11 @@ func (recInfo *RecipientInfo) decryptKey(keyPair tls.Certificate) (key []byte, e
 	return
 }
 
-//KeyTransRecipientInfo ::= SEQUENCE {
-//	version CMSVersion,  -- always set to 0 or 2
-//	rid RecipientIdentifier,
-//	keyEncryptionAlgorithm KeyEncryptionAlgorithmIdentifier,
-//	encryptedKey EncryptedKey }
+//	KeyTransRecipientInfo ::= SEQUENCE {
+//		version CMSVersion,  -- always set to 0 or 2
+//		rid RecipientIdentifier,
+//		keyEncryptionAlgorithm KeyEncryptionAlgorithmIdentifier,
+//		encryptedKey EncryptedKey }
 type KeyTransRecipientInfo struct {
 	Version                int
 	Rid                    RecipientIdentifier `asn1:"choice"`
@@ -112,9 +112,9 @@ func (ktri *KeyTransRecipientInfo) decryptKey(keyPair tls.Certificate) (key []by
 	return nil, nil
 }
 
-//RecipientIdentifier ::= CHOICE {
-//	issuerAndSerialNumber IssuerAndSerialNumber,
-//	subjectKeyIdentifier [0] SubjectKeyIdentifier }
+//	RecipientIdentifier ::= CHOICE {
+//		issuerAndSerialNumber IssuerAndSerialNumber,
+//		subjectKeyIdentifier [0] SubjectKeyIdentifier }
 type RecipientIdentifier struct {
 	IAS IssuerAndSerialNumber `asn1:"optional"`
 	SKI []byte                `asn1:"optional,tag:0"`
@@ -191,12 +191,12 @@ func encryptKeyRSA(key []byte, recipient *x509.Certificate) (ktri KeyTransRecipi
 // ErrUnsupportedAlgorithm is returned if the algorithm is unsupported.
 var ErrUnsupportedAlgorithm = errors.New("cms: cannot decrypt data: unsupported algorithm")
 
-//KeyAgreeRecipientInfo ::= SEQUENCE {
-//	version CMSVersion,  -- always set to 3
-//	originator [0] EXPLICIT OriginatorIdentifierOrKey,
-//	ukm [1] EXPLICIT UserKeyingMaterial OPTIONAL,
-//	keyEncryptionAlgorithm KeyEncryptionAlgorithmIdentifier,
-//	recipientEncryptedKeys RecipientEncryptedKeys }
+//	KeyAgreeRecipientInfo ::= SEQUENCE {
+//		version CMSVersion,  -- always set to 3
+//		originator [0] EXPLICIT OriginatorIdentifierOrKey,
+//		ukm [1] EXPLICIT UserKeyingMaterial OPTIONAL,
+//		keyEncryptionAlgorithm KeyEncryptionAlgorithmIdentifier,
+//		recipientEncryptedKeys RecipientEncryptedKeys }
 type KeyAgreeRecipientInfo struct {
 	Version                int
 	Originator             OriginatorIdentifierOrKey `asn1:"explicit,choice,tag:0"`
@@ -205,53 +205,53 @@ type KeyAgreeRecipientInfo struct {
 	RecipientEncryptedKeys []RecipientEncryptedKey   `asn1:"sequence"` //RecipientEncryptedKeys ::= SEQUENCE OF RecipientEncryptedKey
 }
 
-//OriginatorIdentifierOrKey ::= CHOICE {
-//	issuerAndSerialNumber IssuerAndSerialNumber,
-//	subjectKeyIdentifier [0] SubjectKeyIdentifier,
-//	originatorKey [1] OriginatorPublicKey }
+//	OriginatorIdentifierOrKey ::= CHOICE {
+//		issuerAndSerialNumber IssuerAndSerialNumber,
+//		subjectKeyIdentifier [0] SubjectKeyIdentifier,
+//		originatorKey [1] OriginatorPublicKey }
 type OriginatorIdentifierOrKey struct {
 	IAS           IssuerAndSerialNumber `asn1:"optional"`
 	SKI           []byte                `asn1:"optional,tag:0"`
 	OriginatorKey OriginatorPublicKey   `asn1:"optional,tag:1"`
 }
 
-//OriginatorPublicKey ::= SEQUENCE {
-//	algorithm AlgorithmIdentifier,
-//	publicKey BIT STRING
+//	OriginatorPublicKey ::= SEQUENCE {
+//		algorithm AlgorithmIdentifier,
+//		publicKey BIT STRING
 type OriginatorPublicKey struct {
 	Algorithm pkix.AlgorithmIdentifier
 	PublicKey asn1.BitString
 }
 
-//RecipientEncryptedKey ::= SEQUENCE {
-//	rid KeyAgreeRecipientIdentifier,
-//	encryptedKey EncryptedKey }
+//	RecipientEncryptedKey ::= SEQUENCE {
+//		rid KeyAgreeRecipientIdentifier,
+//		encryptedKey EncryptedKey }
 type RecipientEncryptedKey struct {
 	RID          KeyAgreeRecipientIdentifier `asn1:"choice"`
 	EncryptedKey []byte
 }
 
-//KeyAgreeRecipientIdentifier ::= CHOICE {
-//	issuerAndSerialNumber IssuerAndSerialNumber,
-//	rKeyId [0] IMPLICIT RecipientKeyIdentifier }
+//	KeyAgreeRecipientIdentifier ::= CHOICE {
+//		issuerAndSerialNumber IssuerAndSerialNumber,
+//		rKeyId [0] IMPLICIT RecipientKeyIdentifier }
 type KeyAgreeRecipientIdentifier struct {
 	IAS    IssuerAndSerialNumber  `asn1:"optional"`
 	RKeyID RecipientKeyIdentifier `asn1:"optional,tag:0"`
 }
 
-//RecipientKeyIdentifier ::= SEQUENCE {
-//	subjectKeyIdentifier SubjectKeyIdentifier,
-//	date GeneralizedTime OPTIONAL,
-//	other OtherKeyAttribute OPTIONAL }
+//	RecipientKeyIdentifier ::= SEQUENCE {
+//		subjectKeyIdentifier SubjectKeyIdentifier,
+//		date GeneralizedTime OPTIONAL,
+//		other OtherKeyAttribute OPTIONAL }
 type RecipientKeyIdentifier struct {
 	SubjectKeyIdentifier []byte            //SubjectKeyIdentifier ::= OCTET STRING
 	Date                 time.Time         `asn1:"optional"`
 	Other                OtherKeyAttribute `asn1:"optional"`
 }
 
-//OtherKeyAttribute ::= SEQUENCE {
-//	keyAttrId OBJECT IDENTIFIER,
-//	keyAttr ANY DEFINED BY keyAttrId OPTIONAL }
+//	OtherKeyAttribute ::= SEQUENCE {
+//		keyAttrId OBJECT IDENTIFIER,
+//		keyAttr ANY DEFINED BY keyAttrId OPTIONAL }
 type OtherKeyAttribute struct {
 	KeyAttrID asn1.ObjectIdentifier
 	KeyAttr   asn1.RawValue `asn1:"optional"`
